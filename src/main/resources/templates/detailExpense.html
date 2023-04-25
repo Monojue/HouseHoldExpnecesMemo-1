@@ -15,8 +15,7 @@
 
 </head>
 <body>
-
-	<nav class="navbar navbar-light bg-light justify-content-center mb-2">
+	<nav class="navbar bg-secondary justify-content-center mb-2">
 		<h3>家計費管理</h3>
 	</nav>
 	<div class="row">
@@ -25,21 +24,22 @@
 
 			<div class="row mb-2">
 				<div class="col">
-					<span><a th:href="@{/}">
-					家計費管理</a> / 詳細</span>
+					<span><a th:href="@{/}"> 家計費管理</a> / 詳細</span>
 				</div>
 				<div class="col-6"></div>
 				<div class="col-2">
-					<a th:href="@{/add}" class="btn btn-primary" style="height:40px; width:85px;"> <i
+					<a th:href="@{/add}" class="btn btn-primary"
+						style="height: 40px; width: 85px;"> <i
 						class="bi bi-plus-circle"></i> 追加
 					</a>
 				</div>
 			</div>
-				<div class="card mb-1 bg-secondary">
-					<span class="col text-white card-body" th:text="${total.total}"></span>
-				</div>
-			<a th:each="m : ${list}" th:href="@{/update/{id}(id=${m.id})}" class="card mb-1"
-				style="text-decoration: none;">
+			<div class="card mb-1 bg-secondary">
+				<span class="col text-white card-body"
+					th:text="'合計 ('+${total?.total} +' JPY)'"></span>
+			</div>
+			<a th:each="m : ${list}" th:href="@{/update/{id}(id=${m.id})}"
+				class="card mb-1" style="text-decoration: none;">
 				<div class="card-body row">
 					<div class="col" th:text="${m.edate}">Month</div>
 					<div class="col-3" th:text="${m.name}">Name</div>

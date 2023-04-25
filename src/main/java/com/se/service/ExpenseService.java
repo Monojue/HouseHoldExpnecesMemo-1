@@ -32,8 +32,8 @@ public class ExpenseService {
 		return this.montlyExpenseRepository.getMontlyList();
 	}
 	
-	public List<MontlyExpense> getMonthlyListByMonth(String month) {
-		return this.montlyExpenseRepository.getMonthlyListByMonth(month);
+	public MontlyExpense getMonthlyListByMonth(String month) {
+		return this.montlyExpenseRepository.getMonthlyExpenseByMonth(month);
 	}
 	
 	public Optional<DailyExpense> getDailyExpenseById(Integer id) {

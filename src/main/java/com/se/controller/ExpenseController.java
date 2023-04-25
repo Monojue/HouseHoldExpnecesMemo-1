@@ -50,8 +50,8 @@ public class ExpenseController {
 
 	@GetMapping(value = "/detail/{year}/{month}")
 	public String detailExpense(Model model,@PathVariable String year, @PathVariable String month) {
-//		model.addAttribute("list", this.expenseService.getDailyList(year +"-"+month));
-//		model.addAttribute("total", this.expenseService.getMonthlyListByMonth(year +"-"+month));
+		model.addAttribute("list", this.expenseService.getDailyList(year +"-"+month));
+		model.addAttribute("total", this.expenseService.getMonthlyListByMonth(year +"-"+month));
 		return "detailExpense";
 	}
 

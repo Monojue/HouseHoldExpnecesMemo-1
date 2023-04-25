@@ -16,6 +16,6 @@ public interface MontlyExpenseRepository extends JpaRepository<MontlyExpense, St
 	List<MontlyExpense> getMontlyList();
 	
 	@Query(value = "select to_char(EDATE, 'YYYY/MM') as edate, sum(amount) as total from expense where CAST(EDATE AS VARCHAR) like :month% group by to_char(EDATE, 'YYYY/MM')", nativeQuery = true)
-	List<MontlyExpense> getMonthlyListByMonth(@Param("month") String month);
+	MontlyExpense getMonthlyExpenseByMonth(@Param("month") String month);
 	
 }
