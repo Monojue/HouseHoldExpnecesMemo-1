@@ -1,29 +1,34 @@
 package com.se.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.se.entity.Expense;
-import com.se.repository.ExpenseRepository;
+import com.se.entity.DailyExpense;
+import com.se.entity.MontlyExpense;
+import com.se.repository.DailyExpenseRepository;
+import com.se.repository.MontlyExpenseRepository;
 
 @Service
 public class ExpenseService {
 
 	@Autowired
-	ExpenseRepository expenseRepository;
-	
-	public List<Expense> getAll(){
-		List<Expense> list = new ArrayList<>();
-		list = this.expenseRepository.findAll();
-		return list;
+	DailyExpenseRepository dailyExpenseRepository;
+
+	@Autowired
+	MontlyExpenseRepository montlyExpenseRepository;
+
+	public List<DailyExpense> getDailyList(String month) {
+		return this.dailyExpenseRepository.getDailyList(month);
+	}
+
+	public List<MontlyExpense> getMontlyList() {
+		return this.montlyExpenseRepository.getMontlyList();
 	}
 	
-//	public List<Expense> getMontlyList(){
-//		List<Expense> list = new ArrayList<>();
-//		list = this.expenseRepository.getMontlyList();
-//		return list;
-//	}
+	public Optional<DailyExpense> getDailyExpenseById(Integer id) {
+		return this.dailyExpenseRepository.findById(id);
+	}
 }
