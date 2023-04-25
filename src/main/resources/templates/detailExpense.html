@@ -36,7 +36,7 @@
 				</div>
 			</div>
 				<div class="card mb-1 bg-secondary">
-					<span class="col text-white card-body" th:text="合計"></span>
+					<span class="col text-white card-body" th:text="${total.total}"></span>
 				</div>
 			<a th:each="m : ${list}" th:href="@{/update/{id}(id=${m.id})}" class="card mb-1"
 				style="text-decoration: none;">

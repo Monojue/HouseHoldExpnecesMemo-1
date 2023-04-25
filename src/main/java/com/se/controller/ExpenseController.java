@@ -26,14 +26,15 @@ public class ExpenseController {
 
 	@GetMapping(value = "/add")
 	public String addExpense(Model model) {
-		model.addAttribute(new DailyExpense());
+		model.addAttribute("form", new DailyExpense());
 		return "addExpense";
 	}
 
 	@PostMapping(value = "/add")
 	public String addExpense(Model model, @ModelAttribute("form") DailyExpense e) {
-//		this.ExpensesService.addExpense(e);
-		return "index";
+		this.expenseService.addDailyExpense(e);
+		model.addAttribute("list", this.expenseService.getMontlyList());
+		return "home";
 	}
 
 	@GetMapping(value = "/update/{id}")
@@ -49,8 +50,8 @@ public class ExpenseController {
 
 	@GetMapping(value = "/detail/{year}/{month}")
 	public String detailExpense(Model model,@PathVariable String year, @PathVariable String month) {
-		model.addAttribute("list", this.expenseService.getDailyList(year +"-"+month));
-		System.out.println(model.getAttribute("list"));
+//		model.addAttribute("list", this.expenseService.getDailyList(year +"-"+month));
+//		model.addAttribute("total", this.expenseService.getMonthlyListByMonth(year +"-"+month));
 		return "detailExpense";
 	}
 

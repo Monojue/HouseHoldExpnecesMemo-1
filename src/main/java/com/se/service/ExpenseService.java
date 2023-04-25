@@ -5,13 +5,17 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.interceptor.TransactionInterceptor;
 
 import com.se.entity.DailyExpense;
 import com.se.entity.MontlyExpense;
 import com.se.repository.DailyExpenseRepository;
 import com.se.repository.MontlyExpenseRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class ExpenseService {
 
 	@Autowired
@@ -28,7 +32,20 @@ public class ExpenseService {
 		return this.montlyExpenseRepository.getMontlyList();
 	}
 	
+	public List<MontlyExpense> getMonthlyListByMonth(String month) {
+		return this.montlyExpenseRepository.getMonthlyListByMonth(month);
+	}
+	
 	public Optional<DailyExpense> getDailyExpenseById(Integer id) {
 		return this.dailyExpenseRepository.findById(id);
 	}
+	
+	public void addDailyExpense(DailyExpense e) {
+		try {
+			this.dailyExpenseRepository.save(e);
+		} catch (Exception e2) {
+			TransactionInterceptor.currentTransactionStatus().setRollbackOnly();
+		}
+	}
+
 }
