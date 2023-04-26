@@ -40,10 +40,18 @@ public class ExpenseService {
 		return this.dailyExpenseRepository.findById(id);
 	}
 	
-	public void addDailyExpense(DailyExpense e) {
+	public void addDailyExpense(DailyExpense ex) {
 		try {
-			this.dailyExpenseRepository.save(e);
-		} catch (Exception e2) {
+			this.dailyExpenseRepository.save(ex);
+		} catch (Exception e) {
+			TransactionInterceptor.currentTransactionStatus().setRollbackOnly();
+		}
+	}
+	
+	public void updateDailyExense(DailyExpense ex) {
+		try {
+			this.dailyExpenseRepository.save(ex);
+		}catch (Exception e) {
 			TransactionInterceptor.currentTransactionStatus().setRollbackOnly();
 		}
 	}

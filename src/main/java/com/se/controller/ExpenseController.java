@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.se.entity.DailyExpense;
 import com.se.service.ExpenseService;
@@ -27,7 +26,8 @@ public class ExpenseController {
 	@GetMapping(value = "/add")
 	public String addExpense(Model model) {
 		model.addAttribute("form", new DailyExpense());
-		return "addExpense";
+		model.addAttribute("add", true);
+		return "inputExpense";
 	}
 
 	@PostMapping(value = "/add")
@@ -39,13 +39,15 @@ public class ExpenseController {
 
 	@GetMapping(value = "/update/{id}")
 	public String updateExpense(Model model, @PathVariable Integer id) {
-		model.addAttribute("expense", this.expenseService.getDailyExpenseById(id));
-		return "addExpense";
+		model.addAttribute("form", this.expenseService.getDailyExpenseById(id));
+		return "inputExpense";
 	}
 
 	@PostMapping(value = "/update")
 	public String updateExpense(Model model, @ModelAttribute("form") DailyExpense e) {
-		return "index";
+		this.expenseService.updateDailyExense(e);
+		model.addAttribute("list", this.expenseService.getMontlyList());
+		return "home";
 	}
 
 	@GetMapping(value = "/detail/{year}/{month}")
