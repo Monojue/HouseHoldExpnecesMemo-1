@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.se.entity.DailyExpense;
+import com.se.form.DailyExpenseForm;
 import com.se.service.ExpenseService;
 
 @Controller
@@ -25,21 +26,22 @@ public class ExpenseController {
 
 	@GetMapping(value = "/add")
 	public String addExpense(Model model) {
-		model.addAttribute("form", new DailyExpense());
+		model.addAttribute("form", new DailyExpenseForm());
 		model.addAttribute("add", true);
 		return "inputExpense";
 	}
 
 	@PostMapping(value = "/add")
-	public String addExpense(Model model, @ModelAttribute("form") DailyExpense e) {
+	public String addExpense(Model model, @ModelAttribute("form") DailyExpenseForm e) {
 		this.expenseService.addDailyExpense(e);
 		model.addAttribute("list", this.expenseService.getMontlyList());
-		return "home";
+		return "redirect:/home";
 	}
 
 	@GetMapping(value = "/update/{id}")
 	public String updateExpense(Model model, @PathVariable Integer id) {
 		model.addAttribute("form", this.expenseService.getDailyExpenseById(id));
+//		model.addAttribute("add", false);
 		return "inputExpense";
 	}
 
@@ -47,7 +49,7 @@ public class ExpenseController {
 	public String updateExpense(Model model, @ModelAttribute("form") DailyExpense e) {
 		this.expenseService.updateDailyExense(e);
 		model.addAttribute("list", this.expenseService.getMontlyList());
-		return "home";
+		return "redirect:/home";
 	}
 
 	@GetMapping(value = "/detail/{year}/{month}")

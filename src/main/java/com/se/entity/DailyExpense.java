@@ -24,5 +24,5 @@ public class DailyExpense {
 	@Column(name = "name")
 	String name;
 	@Column(name = "amount")
-	double amount;
+	int amount;
 }

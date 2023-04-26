@@ -13,6 +13,6 @@ import com.se.entity.MontlyExpense;
 @Repository
 public interface DailyExpenseRepository extends JpaRepository<DailyExpense, Integer> {
 
-	@Query(value = "select * from expense where CAST(EDATE AS VARCHAR) like :month%", nativeQuery = true)
+	@Query(value = "select * from expense where CAST(EDATE AS VARCHAR) like :month% order by edate DESC", nativeQuery = true)
 	List<DailyExpense> getDailyList(@Param("month") String month);
 }

@@ -15,5 +15,5 @@ public class MontlyExpense {
 	@Column(name = "edate")
 	String edate;
 	@Column(name = "total")
-	double total;
+	int total;
 }

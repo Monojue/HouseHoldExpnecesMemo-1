@@ -8,5 +8,5 @@ public class DailyExpenseForm {
 	int id;
 	String edate;
 	String name;
-	double amount;
+	String amount;
 }

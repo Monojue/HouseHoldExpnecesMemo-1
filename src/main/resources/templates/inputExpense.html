@@ -14,16 +14,18 @@
 	rel="stylesheet">
 </head>
 <body>
-	<nav class="navbar bg-secondary justify-content-center mb-2">
-		<h3>家計費管理</h3>
+	<nav class="navbar bg-info justify-content-center mb-2">
+		<h3 class="text-white">家計費管理</h3>
 	</nav>
 	<div class="row">
 		<div class="col"></div>
 		<div class="col-5 align-self-center">
 			<div class="row mb-2">
 				<div class="col">
-					<span><a th:href="@{/}"> 家計費管理</a> <span
-						th:text="${add} ? '/ 登録' :'/ 変更'"></span> </span>
+					<span>
+						<a th:href="@{/}"> 家計費管理</a>
+						<span th:text="${add} ? '/ 登録' :'/ 変更'"></span> 
+					</span>
 				</div>
 			</div>
 
