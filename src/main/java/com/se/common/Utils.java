@@ -17,6 +17,7 @@ import com.se.form.MontlyExpenseForm;
 @Component
 public class Utils {
 
+	// change List of Daily Expense Entity to List of Daily Expense Form
 	public List<DailyExpenseForm> changeDailyEntityListToForm(List<DailyExpense> deList) {
 		List<DailyExpenseForm> defList = new ArrayList<>();
 		for (DailyExpense d : deList) {
@@ -30,15 +31,7 @@ public class Utils {
 		return defList;
 	}
 
-//	public DailyExpenseForm changeDailyEntityToForm(DailyExpense de) {
-//		DailyExpenseForm def = new DailyExpenseForm();
-//		def.setId(de.getId());
-//		def.setName(de.getName());
-//		def.setEdate(de.getEdate().toString().replaceAll("-", "/"));
-//		def.setAmount(addCommaToMoney(de.getAmount()));
-//		return def;
-//	}
-	
+	// change Daily Expense Entity to Daily Expense Form
 	public DailyExpenseForm changeDailyEntityToForm(DailyExpense de) {
 		DailyExpenseForm def = new DailyExpenseForm();
 		def.setId(de.getId());
@@ -48,6 +41,7 @@ public class Utils {
 		return def;
 	}
 
+	// change Daily Expense Form to Daily Expense
 	public DailyExpense changeDailyFormToEntity(DailyExpenseForm def) {
 		DailyExpense de = new DailyExpense();
 		de.setId(def.getId());
@@ -55,9 +49,10 @@ public class Utils {
 		Date sqlDate = Date.valueOf(def.getEdate());
 		de.setEdate(sqlDate);
 		de.setAmount(Integer.parseInt(def.getAmount()));
-	return de;
+		return de;
 	}
 
+	// change List of Monthly Expense Entity to Monthly Expense Form
 	public List<MontlyExpenseForm> changeMontlyEntityListToForm(List<MontlyExpense> meList) {
 		List<MontlyExpenseForm> mefList = new ArrayList<>();
 		for (MontlyExpense m : meList) {
@@ -66,6 +61,7 @@ public class Utils {
 		return mefList;
 	}
 
+	// change Monthly Expense Entity to Monthly Expense Form
 	public MontlyExpenseForm changeMontlyEntityToForm(MontlyExpense me) {
 		MontlyExpenseForm mef = new MontlyExpenseForm();
 		mef.setEdate(me.getEdate().toString().replaceAll("-", "/"));
@@ -74,6 +70,7 @@ public class Utils {
 		return mef;
 	}
 
+	// money comma separator
 	public String addCommaToMoney(Integer amount) {
 		DecimalFormat formatter = new DecimalFormat("###,###");
 		return formatter.format(amount);

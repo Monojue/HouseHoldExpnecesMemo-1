@@ -3,6 +3,7 @@ package com.se.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.se.entity.DailyExpense;
 import com.se.form.DailyExpenseForm;
 import com.se.service.ExpenseService;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class ExpenseController {
@@ -32,7 +35,10 @@ public class ExpenseController {
 	}
 
 	@PostMapping(value = "/add")
-	public String addExpense(Model model, @ModelAttribute("form") DailyExpenseForm e) {
+	public String addExpense(Model model,@Valid @ModelAttribute("form") DailyExpenseForm e, BindingResult result) {
+		if(result.hasErrors()) {
+			return "inputExpense";
+		}
 		this.expenseService.addDailyExpense(e);
 		model.addAttribute("list", this.expenseService.getMontlyList());
 		return "redirect:/";
@@ -46,7 +52,10 @@ public class ExpenseController {
 	}
 
 	@PostMapping(value = "/update")
-	public String updateExpense(Model model, @ModelAttribute("form") DailyExpenseForm e) {
+	public String updateExpense(Model model,@Valid @ModelAttribute("form") DailyExpenseForm e, BindingResult result) {
+		if(result.hasErrors()) {
+			return "inputExpense";
+		}
 		this.expenseService.updateDailyExense(e);
 		model.addAttribute("list", this.expenseService.getMontlyList());
 		return "redirect:/";
