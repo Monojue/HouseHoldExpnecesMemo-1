@@ -30,21 +30,30 @@ public class Utils {
 		return defList;
 	}
 
+//	public DailyExpenseForm changeDailyEntityToForm(DailyExpense de) {
+//		DailyExpenseForm def = new DailyExpenseForm();
+//		def.setId(de.getId());
+//		def.setName(de.getName());
+//		def.setEdate(de.getEdate().toString().replaceAll("-", "/"));
+//		def.setAmount(addCommaToMoney(de.getAmount()));
+//		return def;
+//	}
+	
 	public DailyExpenseForm changeDailyEntityToForm(DailyExpense de) {
 		DailyExpenseForm def = new DailyExpenseForm();
 		def.setId(de.getId());
 		def.setName(de.getName());
-		def.setEdate(de.getEdate().toString().replaceAll("-", "/"));
-		def.setAmount(addCommaToMoney(de.getAmount()));
+		def.setEdate(de.getEdate().toString());
+		def.setAmount(String.valueOf(de.getAmount()));
 		return def;
 	}
 
-	public DailyExpense changeDailyEntityToForm(DailyExpenseForm def) {
+	public DailyExpense changeDailyFormToEntity(DailyExpenseForm def) {
 		DailyExpense de = new DailyExpense();
 		de.setId(def.getId());
 		de.setName(def.getName());
-//		 date1=new SimpleDateFormat("dd/MM/yyyy").parse(def.getEdate()); 
-//		de.setEdate();
+		Date sqlDate = Date.valueOf(def.getEdate());
+		de.setEdate(sqlDate);
 		de.setAmount(Integer.parseInt(def.getAmount()));
 	return de;
 	}

@@ -58,15 +58,15 @@ public class ExpenseService {
 
 	public void addDailyExpense(DailyExpenseForm ex) {
 		try {
-			this.dailyExpenseRepository.save(ex);
+			this.dailyExpenseRepository.save(utils.changeDailyFormToEntity(ex));
 		} catch (Exception e) {
 			TransactionInterceptor.currentTransactionStatus().setRollbackOnly();
 		}
 	}
 
-	public void updateDailyExense(DailyExpense ex) {
+	public void updateDailyExense(DailyExpenseForm ex) {
 		try {
-			this.dailyExpenseRepository.save(ex);
+			this.dailyExpenseRepository.save(utils.changeDailyFormToEntity(ex));
 		} catch (Exception e) {
 			TransactionInterceptor.currentTransactionStatus().setRollbackOnly();
 		}

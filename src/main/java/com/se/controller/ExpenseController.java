@@ -35,21 +35,21 @@ public class ExpenseController {
 	public String addExpense(Model model, @ModelAttribute("form") DailyExpenseForm e) {
 		this.expenseService.addDailyExpense(e);
 		model.addAttribute("list", this.expenseService.getMontlyList());
-		return "redirect:/home";
+		return "redirect:/";
 	}
 
 	@GetMapping(value = "/update/{id}")
 	public String updateExpense(Model model, @PathVariable Integer id) {
 		model.addAttribute("form", this.expenseService.getDailyExpenseById(id));
-//		model.addAttribute("add", false);
+		model.addAttribute("add", false);
 		return "inputExpense";
 	}
 
 	@PostMapping(value = "/update")
-	public String updateExpense(Model model, @ModelAttribute("form") DailyExpense e) {
+	public String updateExpense(Model model, @ModelAttribute("form") DailyExpenseForm e) {
 		this.expenseService.updateDailyExense(e);
 		model.addAttribute("list", this.expenseService.getMontlyList());
-		return "redirect:/home";
+		return "redirect:/";
 	}
 
 	@GetMapping(value = "/detail/{year}/{month}")
